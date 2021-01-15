@@ -1,37 +1,36 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
-const drawerWidth = 240;
+// Icons
+import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
+
+const DRAWER_WIDTH = 240;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
       flexShrink: 0,
     },
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
+      width: `calc(100% - ${DRAWER_WIDTH}px)`,
+      marginLeft: DRAWER_WIDTH,
     },
   },
   menuButton: {
@@ -43,11 +42,7 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+    width: DRAWER_WIDTH,
   },
 }));
 
@@ -55,18 +50,20 @@ const NavDrawer = (props : any) => {
   const { window } = props;
   const container = window !== undefined ? () => window().document.body : undefined;
   const classes = useStyles();
-  const theme = useTheme();
   const drawer = (
+
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key="Home" component={Link} to="/">
+          <ListItemIcon><HomeIcon /></ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem button key="Recipes" component={Link} to="/recipes">
+          <ListItemIcon><RestaurantIcon /></ListItemIcon>
+          <ListItemText primary="Recipes" />
+        </ListItem>
       </List>
     </div>
   );
@@ -78,7 +75,6 @@ const NavDrawer = (props : any) => {
         <Drawer
           container={container}
           variant="temporary"
-          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={props.mobileOpen}
           onClose={props.handleDrawerToggle}
           classes={{
@@ -129,25 +125,5 @@ const TopBar = (props: any) => {
   );
 }
 
-function App(props : any) {
-  const classes = useStyles();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <TopBar handleDrawerToggle={handleDrawerToggle} />
-      <NavDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}/>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        ads
-      </main>
-    </div>
-  );
-}
-
-export default App;
+export { TopBar, NavDrawer, DRAWER_WIDTH }
