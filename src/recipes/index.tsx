@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import { sizing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
     inline: {
       display: 'inline',
     },
+    list: {
+      backgroundColor: "#444"
+    },
   }),
 );
 
@@ -26,8 +30,8 @@ const Recipes = (props : any) => {
   const classes = useStyles();
 
   return (
-    <List className={classes.root}>
-      <ListItem alignItems="flex-start">
+    <List className={classes.list}>
+      <ListItem>
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
