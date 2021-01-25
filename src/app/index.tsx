@@ -5,7 +5,7 @@ import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/sty
 
 import { TopBar, NavDrawer, DRAWER_WIDTH } from '../common/NavBar';
 import { Home } from '../home';
-import { Recipes } from '../recipes';
+import { Recipes, Recipe } from '../recipes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +45,8 @@ function App(props : any) {
 
             <Switch>
               <Route exact path="/"><Home /></Route>
-              <Route path="/recipes"><Recipes /></Route>
+              <Route exact path="/recipes"><Recipes /></Route>
+              <Route exact path="/recipes/show"><Recipe /></Route>
             </Switch>
 
           </main>

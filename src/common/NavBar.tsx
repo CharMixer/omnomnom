@@ -51,7 +51,6 @@ const NavDrawer = (props : any) => {
   const container = window !== undefined ? () => window().document.body : undefined;
   const classes = useStyles();
   const drawer = (
-
     <div>
       <div className={classes.toolbar} />
       <Divider />
@@ -118,7 +117,7 @@ const TopBar = (props: any) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Responsive drawer
+          OmNomNom
         </Typography>
       </Toolbar>
     </AppBar>
