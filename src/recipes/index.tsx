@@ -26,8 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
     inline: {
       display: 'inline',
     },
-    table: {
-    },
   }),
 );
 
@@ -67,6 +65,107 @@ const Recipes = (props : any) => {
   );
 }
 
+const Ingrediens = (props : any) => {
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="table of ingrediens">
+        <TableHead>
+          <TableRow>
+            <TableCell>Ingredient</TableCell>
+            <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Calories</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.rp.map((row : any, i : number) => (
+            <TableRow key={row.ingredient}>
+              <TableCell component="th" scope="row">
+                {row.ingredient}
+              </TableCell>
+              <TableCell align="right">{row.amount} {row.unit}</TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+const RecipeInstructions = (props : any) => {
+  return (
+    <>
+      <Accordion defaultExpanded={true}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-label="Expand"
+          aria-controls="additional-actions1-content"
+          id="additional-actions1-header"
+        >
+          <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
+            control={<Checkbox />}
+            label="1. I acknowledge that I should stop the click event propagation"
+          />
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography color="textSecondary">
+            The click event of the nested action will propagate up and expand the accordion unless
+            you explicitly stop it.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion defaultExpanded={true}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-label="Expand"
+          aria-controls="additional-actions2-content"
+          id="additional-actions2-header"
+        >
+          <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
+            control={<Checkbox />}
+            label="2. I acknowledge that I should stop the focus event propagation"
+          />
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography color="textSecondary">
+            The focus event of the nested action will propagate up and also focus the accordion
+            unless you explicitly stop it.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion defaultExpanded={true}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-label="Expand"
+          aria-controls="additional-actions3-content"
+          id="additional-actions3-header"
+        >
+          <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
+            control={<Checkbox />}
+            label="3. I acknowledge that I should provide an aria-label on each action that I add"
+          />
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography color="textSecondary">
+            If you forget to put an aria-label on the nested action, the label of the action will
+            also be included in the label of the parent button that controls the accordion
+            expansion.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </>
+  );
+}
+
 const Recipe = (props : any) => {
   const classes = useStyles();
 
@@ -97,100 +196,16 @@ const Recipe = (props : any) => {
         Nachos med kylling og cheddar
       </Typography>
 
-      <br />
+      <br/>
 
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Ingredient</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell align="right">Calories</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rp.map((row,i) => (
-              <TableRow key={row.ingredient}>
-                <TableCell component="th" scope="row">
-                  {row.ingredient}
-                </TableCell>
-                <TableCell align="right">{row.amount} {row.unit}</TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <br />
-
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-label="Expand"
-          aria-controls="additional-actions1-content"
-          id="additional-actions1-header"
-        >
-          <FormControlLabel
-            aria-label="Acknowledge"
-            onClick={(event) => event.stopPropagation()}
-            onFocus={(event) => event.stopPropagation()}
-            control={<Checkbox />}
-            label="1. I acknowledge that I should stop the click event propagation"
-          />
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand the accordion unless
-            you explicitly stop it.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-label="Expand"
-          aria-controls="additional-actions2-content"
-          id="additional-actions2-header"
-        >
-          <FormControlLabel
-            aria-label="Acknowledge"
-            onClick={(event) => event.stopPropagation()}
-            onFocus={(event) => event.stopPropagation()}
-            control={<Checkbox />}
-            label="2. I acknowledge that I should stop the focus event propagation"
-          />
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography color="textSecondary">
-            The focus event of the nested action will propagate up and also focus the accordion
-            unless you explicitly stop it.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-label="Expand"
-          aria-controls="additional-actions3-content"
-          id="additional-actions3-header"
-        >
-          <FormControlLabel
-            aria-label="Acknowledge"
-            onClick={(event) => event.stopPropagation()}
-            onFocus={(event) => event.stopPropagation()}
-            control={<Checkbox />}
-            label="3. I acknowledge that I should provide an aria-label on each action that I add"
-          />
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography color="textSecondary">
-            If you forget to put an aria-label on the nested action, the label of the action will
-            also be included in the label of the parent button that controls the accordion
-            expansion.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={7} lg={8}>
+          <RecipeInstructions />
+        </Grid>
+        <Grid item xs={12} md={5} lg={4}>
+          <Ingrediens rp={rp}/>
+        </Grid>
+      </Grid>
     </>
   );
 }
